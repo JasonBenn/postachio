@@ -11,8 +11,10 @@
 
     {{ header_meta }}
 
-    <link rel="stylesheet" type="text/css" href="{{ assets('css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css" integrity="sha256-sxzrkOPuwljiVGWbxViPJ14ZewXLJHFJDn0bv+5hsDY=" crossorigin="anonymous" /> 
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,700|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <style>
 
@@ -27,30 +29,21 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.4;
   color: #222427;
   background: #f7f6f5;
   margin: 0;
   text-rendering: optimizeLegibility;
   animation: fadein 1s ease;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   -webkit-font-smoothing: antialiased;
 }
 
-
-section, aside {
-  max-width: 600px;
-  margin: auto;
-  margin-bottom: 3em;
-}
-
-.projects {
-  max-width: 100%;
-  overflow-x: scroll;
+@media (min-width: 980px) {
+  body {
+    padding-top: 120px;
+  }
 }
 
 a {
@@ -70,7 +63,7 @@ a:hover {
 h1 {
   font-family: 'Nunito', sans-serif;
   font-weight: 300;
-  font-size: 1.6em;
+  font-size: 24px;
 }
 
 h1 strong {
@@ -88,118 +81,6 @@ h1 strong {
   margin: 4em 0;
   position: relative;
   width: 100%;
-  max-width: 600px;
-}
-
-.divider--short {
-  margin-top: 0;
-}
-
-.divider__title {
-  background: #f7f6f5;
-  position: absolute;
-  display: block;
-  white-space: nowrap;
-  top: -25px;
-  padding: 0 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  font-weight: normal;
-  letter-spacing: 1px;
-  color: #BAADA3;
-}
-
-.projects {
-  display: flex;
-  justify-content: center;
-  max-width: 90vw;
-}
-
-.project {
-  padding: 1em;
-  border-radius: 3px;
-  flex-basis: 100%;
-  max-width: 20em;
-  box-sizing: border-box;
-  border: 1px solid #f7f6f5;
-  transition: .2s all;
-  min-width: 12em;
-  filter: grayscale(100%);
-}
-
-.project:hover {
-  filter: initial;
-}
-
-@media (max-width: 600px) {
-  .projects {
-    flex-direction: column;
-  }
-
-  .project {
-    max-width: 100%;
-    flex-basis: initial;
-    filter: initial;
-  }
-}
-
-.project__image-wrapper {
-  width: 100%;
-  margin-bottom: 1em;
-}
-
-@media (max-width: 600px) {
-  .project__image-wrapper {
-    float: left;
-    margin: 0 10px 10px 0;
-    width: 125px;
-  }
-}
-
-.project__image {
-  border-radius: 3px;
-  width: 100%;
-}
-
-.post {
-  display: flex;
-}
-
-.post__category {
-  flex: 1;
-  letter-spacing: 1px;
-  padding-right: 20px;
-}
-
-.post__description {
-  flex: 4;
-  margin-bottom: 20px;
-  color: #212429;
-}
-
-.post__description h3, .project__description h3 {
-  margin: 0;
-}
-
-.post__description p, .project__description p {
-  margin: 8px 0;
-}
-
-.contact {
-  margin-bottom: 4em;
-  max-width: 17em;
-  font-family: Avenir-Medium,sans-serif;
-  font-size: 18px;
-  color: #222427;
-  line-height: 25px;
-  text-align: center;
-}
-
-.contact a {
-  color: #0C85AC;
 }
 
 blockquote {
@@ -229,167 +110,143 @@ blockquote {
   </head>
   <body>
 
+
+  <div class="container">
     <div class="row">
-      <div class="span4 header">
-
-        <div class="site-description">
-          <ul>
-          {% if homepage %}
-          <li><a href="/tag/ml" class="{{ set_active('/tag/ml') }}">Machine learning</a></li>
-          <li><a href="/tag/employment" class="{{ set_active('/tag/employment') }}">Unmployment crisis</a></li>
-          <li><a href="/tag/community" class="{{ set_active('/tag/community') }}">Community</a></li>
-          <li><a href="/blog">Blog</a></li>
-          {% else %}
-          <li><a href="/">Blog</a></li>
-          {% endif %}   
-          {% if pages|length > 0 %}
-            {% for page in pages %}
-            <li><a href="{{ page.url }}" class="{{ set_active(page.url) }}">{{ page.title }}</a></li>
-            {% endfor %}
-          {% endif %}
-          </ul>
-        </div>
+      
+      <div class="col-2 sidebar site-description">
+        <ul>
+        <li class='button'><a href="/">Home</a></li>
+        <li><a href="/tag/ml" class="{{ set_active('/tag/ml') }}">Machine learning</a></li>
+        <li><a href="/tag/employment" class="{{ set_active('/tag/employment') }}">Future of work</a></li>
+        <li><a href="/tag/community" class="{{ set_active('/tag/community') }}">Communal living</a></li>
+        {% if pages|length > 0 %}
+          {% for page in pages %}
+          <li><a href="{{ page.url }}" class="{{ set_active(page.url) }}">{{ page.title }}</a></li>
+          {% endfor %}
+        {% endif %}
+        </ul>
       </div>
-    </div>
 
-    <div class="row wrapper">
+      <div class="col-8 offset1">
 
-      <div class="span4 spacer"></div>
+        {% if is_home and homepage %}
 
-      {% if is_home and homepage %}
+          <div class="post">
+            <div class="post-body" data-type-cleanup="true">
+              {{ homepage.content }}
+            </div>
 
-      <div class="span6 offset1 posts">
-        <div class="post whole span6">
-          <div class="post-body" data-type-cleanup="true">
-            {{ homepage.content }}
+            <div class="divider"></div>
+
+            <aside>
+              <blockquote cite="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">
+                <p class="pull-quote">Jason Benn’s transformation is nothing short of astonishing. [His] story highlights a crucial lesson: deep work is not some nostalgic affectation of of writers and early-twentieth-century philosophers. It’s instead a skill that has great value today.</p>
+                <p>— Cal Newport, <em><a onclick="trackOutboundLink('https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692'); return false;" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">Deep Work: Rules for Focused Success in a Distracted World</a></em></p>
+              </blockquote>
+            </aside>
+
           </div>
 
-          <div class="divider divider--short"></div>
-
-          <aside>
-            <blockquote cite="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">
-              <p class="pull-quote">Jason Benn’s transformation is nothing short of astonishing. [His] story highlights a crucial lesson: deep work is not some nostalgic affectation of of writers and early-twentieth-century philosophers. It’s instead a skill that has great value today.</p>
-              <p>— Cal Newport, <em><a onclick="trackOutboundLink('https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692'); return false;" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">Deep Work: Rules for Focused Success in a Distracted World</a></em></p>
-            </blockquote>
-          </aside>
-
-        </div>
-      </div>
-
-      {% elif is_home or is_blog or is_tag %}
-
-      <div class="span6 offset1 posts">
+        {% elif is_home or is_blog or is_tag %}
 
           {% if is_tag %}
-          <h4 class="sub-heading span6">Showing all posts tagged {{ tag }}:</h4>
+  
+            {% for post in posts %}
+              {% if post.title == tag %}
+                <section>
+                  {{ post.content }}
+                </section>  
+              {% endif %}
+            {% endfor %}
+
           {% endif %}
 
           {% if posts %}
-          {% for post in posts %}
-          <div class="post span6">
-            <div class="row">
-              <div class="span6">
-                <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-              </div>
-            </div>
-            <div class="post-body" data-type-cleanup="true">
-              {{ post.content }}
-            </div>
-            <div class="post-info">
-              <div class="info-left">
-                <p class="date">{{ post.created_at|format_date }}</p>
-              </div>
-              <div class="info-right">
-                <p class="read-more"><a href="{{ post.url }}">Read More &raquo;</a></p>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          <div class="pagination span6">
-            {% if pagination.prev %}<a href="{{ pagination.prev }}" class="post-prev">&larr; View Previous Posts</a>{% endif %}
-            {% if pagination.next %}<a href="{{ pagination.next }}" class="post-next">View More Posts &rarr;</a>{% endif %}
-          </div>
-          {% else %}
-          <h4 class="sub-heading span6">No Posts Yet :(</h4>
-          {% endif %}
-      </div>
-
-      {% elif post %}
-
-      <div class="span6 offset1 posts">
-        <div class="post whole span6">
-          <h1>{{ post.title }}</h1>
-          <div class="post-info">
-            <div class="info-left">
-              <p class="date">{{ post.created_at|format_date }}</p>
-            </div>
-            <div class="info-right">
-              <p class="comments">
-                <a href="/"><i class="icon-comment"></i> 0</a>
-              </p>
-            </div>
-          </div>
-          <div class="post-body">
-            <div class="post-content" data-type-cleanup="true">
-              {{ post.content }}
-            </div>
-
-            {% if post.type == 'link' %}
-            <p><a href="{{ post.link_url }}"><i class="icon-share"></i> {{ post.link_url }}</a></p>
-            {% endif %}
-
-            {{ theme.social.bar }}
-
-            {% if post.tags %}
-            <ul class="post-tags">
-            {% for tag in post.tags %}
-              <li><a href="/tag/{{ tag }}">{{ tag|format_tag(link=False, humanize=True) }}</a></li>
+            {% for post in posts %}
+              {% if post.title != tag %}
+                <div class="post">
+                  <div><a href="{{ post.url }}">{{ post.title }}</a> <span class="date">{{ post.created_at|format_date }}</span></div> 
+                </div> 
+              {% endif %}
             {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-          <div class="post-footer">
-            <p class="back"><a href="/">&laquo; Go Back</a></p>
-          </div>
-          {% if site.disqus %}
-          <div class="post-comments">
-            <div id="disqus_thread"></div>
-            <script>
-              var disqus_shortname = '{{ site.disqus }}';
-              var disqus_url = '{{site.base_url}}{{ post.url }}';
-              (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-              })();
-            </script>
-          </div>
+
+            <div class="pagination">
+              {% if pagination.prev %}<a href="{{ pagination.prev }}" class="post-prev">&larr; View Previous Posts</a>{% endif %}
+              {% if pagination.next %}<a href="{{ pagination.next }}" class="post-next">View More Posts &rarr;</a>{% endif %}
+            </div>
+
+          {% else %}
+
+            <h4 class="sub-heading">No Posts Yet</h4>
+
           {% endif %}
+
+        {% elif post %}
+
+          <div class="post whole">
+            <h1>{{ post.title }}</h1>
+
+            <div class="post-body">
+              <div class="post-content" data-type-cleanup="true">
+                {{ post.content }}
+              </div>
+
+              {% if post.type == 'link' %}
+              <p><a href="{{ post.link_url }}"><i class="icon-share"></i> {{ post.link_url }}</a></p>
+              {% endif %}
+
+              {{ theme.social.bar }}
+
+              {% if post.tags %}
+              <ul class="post-tags">
+              {% for tag in post.tags %}
+                <li><a href="/tag/{{ tag }}">{{ tag|format_tag(link=False, humanize=True) }}</a></li>
+              {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+            <div class="post-footer">
+              <p class="back"><a href="/">&laquo; Go Back</a></p>
+            </div>
+
+            {% if site.disqus %}
+              <div class="post-comments">
+                <div id="disqus_thread"></div>
+                <script>
+                  var disqus_shortname = '{{ site.disqus }}';
+                  var disqus_url = '{{site.base_url}}{{ post.url }}';
+                  (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                  })();
+                </script>
+              </div>
+            {% endif %}
+
+          </div>
         </div>
-      </div>
 
-    {% elif post.type == 'page' %}
-
-      <div class="span6 offset1 posts">
-        <div class="post whole span6">
+      {% elif post.type == 'page' %}
+        <div class="post">
           <h1>{{ page.title }}</h1>
           <div class="post-body" data-type-cleanup="true">
             {{ page.content }}
           </div>
-          <div class="post-footer">
-            <p class="back"><a href="/">&laquo; Go Back</a></p>
-          </div>
         </div>
+      {% endif %}
+
       </div>
-
-    {% endif %}
-
     </div>
+  </div>
 
-    {{ footer_meta }}
 
-    <!-- bootstrap -->
-    <script src="{{ static('libs/bootstrap/js/bootstrap.min.js') }}" /></script>
+  {{ footer_meta }}
+
+  <!-- bootstrap -->
+  <script src="{{ static('libs/bootstrap/js/bootstrap.min.js') }}" /></script>
 
   </body>
 </html>
