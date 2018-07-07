@@ -93,6 +93,10 @@ blockquote {
   border-left: 3px solid #EE4D33;
 }
 
+.hidden {
+  display: none;
+}
+
     </style>
 
     {% if site.analytics %}
@@ -168,6 +172,11 @@ blockquote {
                 <div class="post">
                   <div><a href="{{ post.url }}">{{ post.title }}</a> <span class="date">{{ post.created_at|format_date }}</span></div> 
                 </div> 
+
+                <div class="hideable hidden post-content" data-type-cleanup="true">
+                  {{ post.content }}
+                </div>
+
               {% endif %}
             {% endfor %}
 
@@ -247,6 +256,16 @@ blockquote {
 
   <!-- bootstrap -->
   <script src="{{ static('libs/bootstrap/js/bootstrap.min.js') }}" /></script>
+  <script>
+    $(document).ready(() => {
+      // Remove the element after the notes
+      var $hr = $('.post-content hr:first-child')
+      $hr.parent().next().remove()
+      // Remove subsequent siblings of the <hr>
+      $hr.nextAll().remove()
+      $('.hideable').removeClass('hidden')
+    })
+  </script>
 
   </body>
 </html>
