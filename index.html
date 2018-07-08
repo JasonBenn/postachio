@@ -46,7 +46,20 @@ body {
   }
 }
 
+@media (max-width: 720px) {
+  .row {
+    flex-direction: column;
+  }
+  .row * {
+    max-width: 100%;
+  }
+  .sidebar {
+    margin-left: -1em;
+  }
+}
+
 .container {
+  padding-top: 1em;
   padding-bottom: 4em;
 }
 
@@ -77,6 +90,11 @@ h1 strong {
 
 h2 {
   font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+h2:not(:first-child) {
+  margin-top: 1.5em;
 }
 
 h3 {
@@ -89,9 +107,8 @@ h3 {
 
 .divider {
   height: 1px;
-  background: #DDD;
-  border-bottom: #FFF solid 1px;
-  margin: 4em 0;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  margin: 3em 0;
   position: relative;
   width: 100%;
 }
@@ -130,7 +147,8 @@ blockquote {
 }
 
 .button-wrapper {
-  margin: 1em 0;
+  margin-bottom: 1em;
+  margin-top: .5em;
 }
 
 .sidebar ul {
