@@ -142,7 +142,22 @@ blockquote {
 }
 
 .sources {
-  margin-top: 2.5em;
+  margin-top: 2em;
+}
+
+img {
+  width: 250px !important;
+  border-radius: 250px;
+}
+
+.date {
+  display: block;
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+.blurb .date {
+  margin-top: 2em;
 }
 
     </style>
@@ -203,9 +218,10 @@ blockquote {
   
             {% for post in posts %}
               {% if post.title == tag %}
-                <section>
+                <section class='blurb'>
                   {{ post.content }}
-                </section>  
+                  <span class="date">Updated: {{ post.updated_at|format_date }}</span>
+                </section>
               {% endif %}
             {% endfor %}
 
