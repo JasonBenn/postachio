@@ -228,6 +228,16 @@ img {
               </blockquote>
             </aside>
 
+            <div class='hidden'>
+              <!-- Links to all pages and their URLs, for debugging purposes. -->
+              <ol>
+                {% for page in pages %}
+                  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+              </ol>
+            </div>
+
+
           </div>
 
         {% elif is_home or is_blog or is_tag %}
