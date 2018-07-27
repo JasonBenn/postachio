@@ -115,9 +115,6 @@ h3 {
 
 blockquote {
   margin: 0;
-}
-
-.pull-quote {
   font-style: italic;
   padding-left: 1.5em;
   border-left: 3px solid #EE4D33;
@@ -163,9 +160,13 @@ blockquote {
   margin-top: 2em;
 }
 
-img {
+.profile {
   width: 250px !important;
   border-radius: 250px;
+}
+
+.post div + div {
+  margin-top: .75em;
 }
 
 .date {
@@ -223,9 +224,10 @@ img {
 
             <aside>
               <blockquote cite="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">
-                <p class="pull-quote">Jason Benn’s transformation is nothing short of astonishing. [His] story highlights a crucial lesson: deep work is not some nostalgic affectation of of writers and early-twentieth-century philosophers. It’s instead a skill that has great value today.</p>
-                <p>— Cal Newport, <em><a onclick="trackOutboundLink('https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692'); return false;" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">Deep Work: Rules for Focused Success in a Distracted World</a></em></p>
+                Jason Benn’s transformation is nothing short of astonishing. [His] story highlights a crucial lesson: deep work is not some nostalgic affectation of of writers and early-twentieth-century philosophers. It’s instead a skill that has great value today.
               </blockquote>
+              <br>
+              <p>— Cal Newport, <em><a onclick="trackOutboundLink('https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692'); return false;" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">Deep Work: Rules for Focused Success in a Distracted World</a>, pp 8-12</em></p>
             </aside>
 
             <div class='hidden'>
@@ -324,6 +326,7 @@ img {
           <h1>{{ page.title }}</h1>
           <div class="post-body" data-type-cleanup="true">
             {{ page.content }}
+            <img src="https://s3-us-west-2.amazonaws.com/postachio/profile.jpg" class='profile' alt="">
           </div>
         </div>
       {% endif %}
@@ -342,7 +345,7 @@ img {
       if (document.location.pathname.startsWith('/tag')) {
         // Remove the element after the notes
         var $hr = $('.post-content hr')
-        $hr.parent().next().remove()
+        $hr.parentsUntil('.post-content').each((i, parent) => $(parent).nextAll().remove())
         // Remove subsequent siblings of the <hr>
         $hr.nextAll().remove()
         $('.hideable').removeClass('hidden')        
