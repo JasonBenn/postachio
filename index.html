@@ -158,6 +158,7 @@ blockquote {
 
 .sources {
   margin-top: 2em;
+  margin-bottom: .5em;
 }
 
 .profile {
@@ -223,22 +224,12 @@ blockquote {
             <div class="divider"></div>
 
             <aside>
-              <blockquote cite="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">
+              <blockquote cite="https://amzn.to/2OKq68X">
                 Jason Benn’s transformation is nothing short of astonishing. [His] story highlights a crucial lesson: deep work is not some nostalgic affectation of of writers and early-twentieth-century philosophers. It’s instead a skill that has great value today.
               </blockquote>
               <br>
-              <p>— Cal Newport, <em><a onclick="trackOutboundLink('https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692'); return false;" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">Deep Work: Rules for Focused Success in a Distracted World</a>, pp 8-12</em></p>
+              <p>— Cal Newport, <em><a onclick="trackOutboundLink('https://amzn.to/2OKq68X'); return false;" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692">Deep Work: Rules for Focused Success in a Distracted World</a>, pp 8-12</em></p>
             </aside>
-
-            <div class='hidden'>
-              <!-- Links to all pages and their URLs, for debugging purposes. -->
-              <ol>
-                {% for page in pages %}
-                  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-              </ol>
-            </div>
-
 
           </div>
 
@@ -259,6 +250,7 @@ blockquote {
 
           {% if posts %}
             <h2 class='sources'>Sources, notes:</h2>
+            <i>Key: ✍️ is a blog post, 📘 is a flashcard, no emoji means notes &amp; highlights.</i>
             <hr>
 
             {% for post in posts %}
