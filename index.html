@@ -10,6 +10,9 @@
     </title>
 
     {{ header_meta }}
+    <link rel="shortcut icon" href="https://postachio-static.s3.amazonaws.com/cf538897584c2dece91573d9c4a12334" type="image/x-icon">
+    <link rel="icon" href="https://postachio-static.s3.amazonaws.com/cf538897584c2dece91573d9c4a12334" type="image/x-icon">
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css" integrity="sha256-sxzrkOPuwljiVGWbxViPJ14ZewXLJHFJDn0bv+5hsDY=" crossorigin="anonymous" /> 
@@ -334,6 +337,7 @@ blockquote {
   <script src="{{ static('libs/bootstrap/js/bootstrap.min.js') }}" /></script>
   <script>
     $(document).ready(() => {
+      // Shorten posts into blurbs
       if (document.location.pathname.startsWith('/tag')) {
         // Remove the element after the notes
         var $hr = $('.post-content hr')
@@ -342,6 +346,25 @@ blockquote {
         $hr.nextAll().remove()
         $('.hideable').removeClass('hidden')        
       }
+
+      // IDify elements that contain `[#]` so they're linkable
+      var $els = $(':contains([#])').filter((i, el) => $(el).children().length === 0)
+      $els.each((i, el) => {
+        var $el = $(el)
+        var text = $el.text()
+        var newText = text.replace('[#]', '')
+        var cleanedText = text.toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ')
+        var anchorTag = cleanedText.split(' ').slice(0, 3).join('-')
+        $el.attr('id', anchorTag)
+        $el.text(newText)
+      })
+
+      // Scroll to a linkified element if the URL says so
+      var linked = $(location.hash)[0]
+      if (linked) {
+        linked.scrollIntoView()
+      }
+
     })
   </script>
 
